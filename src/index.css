@@ -1,13 +1,20 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* COLORS
+Silver Sand      #C8C8C7
+Morning blue     #819595
+Jet(dark-grey)   #383637
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*/
+
+
+
+.calculator {
+  margin: 0 auto;
+  width: 400px;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  /* background-color: #C8C8C7;s */
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  border: 1px solid #000;
 }
