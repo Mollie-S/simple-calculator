@@ -5,20 +5,29 @@ import Display from './Display'
 
 class Calculator extends React.Component {
   state = {
-    value: '0'
+    previousValue: '',
+    currentValue: '0',
+    operand: ''
   }
 
-  handleChange = (e) => this.setState({value: e.target.value});
+  handleChange = (e) => this.setState({currentValue: e.target.value});
   handleClick = (e) => {
-    this.setState({value: e.target.id});
+    const {id, value} = e.target
+      if (id === 'clear') {
+        this.setState({currentValue: '0'});
+      } else {
+          this.setState(prevState =>
+             ({currentValue: prevState.currentValue.concat(value)}));
+        }
+
   }
 
 
   render () {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className='calculator'>
-        <Display value={this.state.value} onChange={this.handleChange}/>
+        <Display value={this.state.currentValue} onChange={this.handleChange}/>
         <Keypad onClick={this.handleClick}/>
       </div>
     );

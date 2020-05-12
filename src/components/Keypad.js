@@ -3,40 +3,40 @@ import Button from './Button';
 
 const calcButtons = [
   {
-    id: 'clear', name: 'C',
+    id: 'clear', value: 'C',
     style: {gridColumnStart: '1',
     gridColumnEnd: '3'}
   },
-  {id: 'plus-minus', name: '±'},
+  {id: 'plus-minus', value: '±'},
   {
-    id: 'divide', name: '÷',
+    id: 'divide', value: '÷',
     style: {backgroundColor: '#696773'}
   },
-  {id: 'seven', name: '7'},
-  {id: 'eight', name: '8'},
-  {id: 'nine', name: '9'},
+  {id: 'seven', value: '7'},
+  {id: 'eight', value: '8'},
+  {id: 'nine', value: '9'},
   {
-    id: 'multiply', name: '×',
+    id: 'multiply', value: '×',
     style: {backgroundColor: '#696773'}
   },
-  {id: 'four', name: '4'},
-  {id: 'five', name: '5'},
-  {id: 'six', name: '6'},
+  {id: 'four', value: '4'},
+  {id: 'five', value: '5'},
+  {id: 'six', value: '6'},
   {
-    id: 'subtract', name: '-',
+    id: 'subtract', value: '-',
     style: {backgroundColor: '#696773'}
   },
-  {id: 'one', name: '1'},
-  {id: 'two', name: '2'},
-  {id: 'three', name: '3'},
+  {id: 'one', value: '1'},
+  {id: 'two', value: '2'},
+  {id: 'three', value: '3'},
   {
-    id: 'add', name: '+',
+    id: 'add', value: '+',
     style: {backgroundColor: '#696773'}
   },
-  {id: 'zero', name: '0'},
-  {id: 'decimal', name: '.'},
+  {id: 'zero', value: '0'},
+  {id: 'decimal', value: '.'},
   {
-    id: 'equals', name: '=',
+    id: 'equals', value: '=',
     style: {gridColumnStart: '3',
     gridColumnEnd: '5',
     backgroundColor: '#696773'}
