@@ -9,7 +9,7 @@ function Header() {
   );
 }
 const headerStyle = {
-backgroundColor: '#819595',
+backgroundColor: '#696773',
 color: '#fff',
 width: '70%',
 padding: '0.5rem',

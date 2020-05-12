@@ -5,7 +5,7 @@ import Display from './Display'
 
 class Calculator extends React.Component {
   state = {
-    value: '32'
+    value: '0'
   }
 
   handleChange = (e) => this.setState({value: e.target.value});
