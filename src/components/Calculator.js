@@ -13,13 +13,18 @@ class Calculator extends React.Component {
   handleChange = (e) => this.setState({currentValue: e.target.value});
   handleClick = (e) => {
     const {id, value} = e.target
+    const {previousValue, currentValue} = this.state
+
+    if (currentValue === '0' && value !== '.') {
+      this.setState({currentValue: ''})
+    }
+
       if (id === 'clear') {
         this.setState({currentValue: '0'});
       } else {
-          this.setState(prevState =>
-             ({currentValue: prevState.currentValue.concat(value)}));
+          this.setState(prevNumber =>
+             ({currentValue: prevNumber.currentValue.concat(value)}));
         }
-
   }
 
 
