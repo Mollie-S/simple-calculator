@@ -5,16 +5,38 @@ Jet(dark-grey)   #383637
 
 */
 
-
-
 .calculator {
   margin: 0 auto;
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  width: 350px;
+  border-radius: 7px
+
+}
+
+.keypad {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  /* background-color: #C8C8C7;s */
   font-family: 'Poppins', sans-serif;
-  border-radius: 8px;
-  border: 1px solid #000;
+
+}
+
+.calcDisplay {
+
+  height: 4rem;
+  background-color: #383637;
+
+}
+
+.keypadButton {
+  text-align: center;
+  /* // border: '1px solid #fff', */
+  border-radius: 2px;
+  color: #fff;
+  font-size: 1.5rem;
+  background-color: #C8C8C7;
+  height: 4rem;
+
 }

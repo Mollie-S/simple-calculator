@@ -1,11 +1,11 @@
 import React from 'react';
-import Calculator from './components/Calculator'
+import Calculator from './components/Calculator';
+import Header from './components/Header'
 
 function App() {
   return (
     <div className="App">
-      <h1 style={{textAlign: 'center'}}>Calculator</h1>
-
+      <Header />
       <Calculator />
     </div>
   );
