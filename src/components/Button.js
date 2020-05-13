@@ -8,7 +8,7 @@ function Button(props) {
         style={props.button.style}
         id={props.button.id}
         className='keypadButton'
-        onClick={props.onClick}>{props.button.value}</button>
+        onClick={props.onClick}>{props.button.btnSymbol}</button>
   );
 }
 

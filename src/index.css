@@ -27,8 +27,16 @@ Dark liver  #4C4A4B
 
   height: 4rem;
   background-color: #383637;
-
+  color: #fff;
+  font-size: 3rem;
+  display:flex;
+  justify-content: flex-end;
+  align-content:flex-end;
 }
+.calcDisplay p {
+  margin: 0 0.5rem;
+}
+
 
 .keypadButton {
   text-align: center;

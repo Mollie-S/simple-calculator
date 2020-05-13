@@ -7,33 +7,54 @@ class Calculator extends React.Component {
   state = {
     previousValue: '',
     currentValue: '0',
-    operand: ''
+    operator: ''
   }
 
-  handleChange = (e) => this.setState({currentValue: e.target.value});
+  // handleChange = (e) => this.setState({currentValue: e.target.value});
   handleClick = (e) => {
-    const {id, value} = e.target
-    const {previousValue, currentValue} = this.state
-
-    if (currentValue === '0' && value !== '.') {
+    const {value, id} = e.target;
+    const {previousValue, currentValue, operator} = this.state;
+    
+    if (currentValue === '0' && id !== 'decimal') {
       this.setState({currentValue: ''})
+    } else if (currentValue === '0' && id === 'decimal') {
+      this.setState({currentValue: '0.'})
     }
 
-      if (id === 'clear') {
-        this.setState({currentValue: '0'});
-      } else {
-          this.setState(prevNumber =>
-             ({currentValue: prevNumber.currentValue.concat(value)}));
-        }
+    if (id === 'clear') {
+      this.setState({previousValue: '', currentValue: '0', operator: ''});
+    } else if (/\d/g.test(value) || value === '.' ) {
+        this.setState(prevState =>
+          ({currentValue: prevState.currentValue.concat(value)}));
+    } else if (id === 'add'
+            || id === 'subtract'
+            || id === 'multiply'
+            || id === 'divide') {
+        this.setState(prevState => {
+          if (currentValue !== '') {
+            return {
+              currentValue: '',
+              previousValue: prevState.currentValue,
+              operator: value
+            }
+          } else {
+            return {
+              operator: value
+            }
+          }
+        })
+    }
+    else if (value === '=') {
+         this.setState({currentValue: eval(previousValue + operator + currentValue).toString()})
+       }
   }
-
 
   render () {
     // console.log(this.props);
     return (
       <div className='calculator'>
-        <Display value={this.state.currentValue} onChange={this.handleChange}/>
-        <Keypad onClick={this.handleClick}/>
+        <Display value={this.state.currentValue===''? this.state.previousValue : this.state.currentValue} />
+        <Keypad onClick={this.handleClick} />
       </div>
     );
   }
