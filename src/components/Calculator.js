@@ -49,21 +49,25 @@ class Calculator extends React.Component {
         })
     }
     else if (id === 'equals') {
-       if (previousValue !== '' && operator !== '' && currentValue !== '') {
-         this.setState(prevState => {
+     if (previousValue !== '' && operator !== '' && currentValue !== '') {
+       this.setState(prevState => {
           let num1 = parseFloat(prevState.previousValue);
           let num2 = parseFloat(prevState.currentValue);
           let result = mathOperations[prevState.operator](num1,num2);
 
-           return {currentValue: result.toString(),
-                   previousValue: prevState.currentValue}
-         })
-       } else if (previousValue === '' && operator === '') {
+          return {
+            currentValue: result.toString(),
+            previousValue: '',
+            operator: ''
+          }
+        })
+     } else if (previousValue === '' && operator === '') {
          this.setState({currentValue: currentValue})
        } else if (previousValue !== '' && operator !== '' && currentValue === '') {
-         this.setState(prevState =>
+          this.setState(prevState =>
             ({currentValue: prevState.previousValue,
-              previousValue: prevState.previousValue}))
+              previousValue: '',
+              operator: ''}))
 
        }
 
