@@ -22,17 +22,26 @@ class Calculator extends React.Component {
     const {value, id} = e.target;
     const {previousValue, currentValue, operator} = this.state;
 
-    if (currentValue === '0' && id !== 'decimal') {
+    if (currentValue === '0' && id !== 'decimal' && !(id in mathOperations)) {
       this.setState({currentValue: ''})
-    } else if (currentValue === '0' && id === 'decimal') {
-      this.setState({currentValue: '0'})
+    } else if (currentValue === '0' && id in mathOperations) {
+      this.setState({currentValue: currentValue})
     }
 
     if (id === 'clear') {
       this.setState({previousValue: '', currentValue: '0', operator: ''});
-    } else if (/\d/g.test(value) || id  === 'decimal' ) {
-        this.setState(prevState =>
-          ({currentValue: prevState.currentValue.concat(value)}));
+    } else if (/\d/g.test(value) || id  === 'decimal') {
+        this.setState(prevState => {
+          if (currentValue !== '' && operator !== '' && previousValue === '') {
+            return {
+              currentValue: value,
+              previousValue: '',
+              operator: ''
+            }
+          } else {
+            return {currentValue: prevState.currentValue.concat(value)}
+          }
+        });
     } else if (id in mathOperations) {
         this.setState(prevState => {
           if (currentValue !== '') {
@@ -47,31 +56,31 @@ class Calculator extends React.Component {
             }
           }
         })
-    }
-    else if (id === 'equals') {
-     if (previousValue !== '' && operator !== '' && currentValue !== '') {
-       this.setState(prevState => {
-          let num1 = parseFloat(prevState.previousValue);
-          let num2 = parseFloat(prevState.currentValue);
-          let result = mathOperations[prevState.operator](num1,num2);
+    } else if (id === 'equals') {
+       if (previousValue !== '' && operator !== '' && currentValue !== '') {
+         this.setState(prevState => {
+            let num1 = parseFloat(prevState.previousValue);
+            let num2 = parseFloat(prevState.currentValue);
+            let result = mathOperations[prevState.operator](num1,num2);
 
-          return {
-            currentValue: result.toString(),
-            previousValue: '',
-            operator: ''
-          }
-        })
-     } else if (previousValue === '' && operator === '') {
-         this.setState({currentValue: currentValue})
-       } else if (previousValue !== '' && operator !== '' && currentValue === '') {
+            return {
+              currentValue: result.toString(),
+              // operator: '',
+              previousValue: ''
+            }
+          })
+        } else if (previousValue === '' && operator === '') {
+           this.setState({currentValue: currentValue})
+        } else if (currentValue === '' && operator !== '' && previousValue !== '') {
           this.setState(prevState =>
             ({currentValue: prevState.previousValue,
-              previousValue: '',
-              operator: ''}))
+              // operator: '',
+              previousValue: ''
+            }))
 
-       }
+          }
 
-    }
+      }
   }
 
   render () {
