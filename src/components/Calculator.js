@@ -26,6 +26,12 @@ class Calculator extends React.Component {
       this.setState(prevState => {
         let {previousValue, currentValue, operator} = prevState;
 
+        if (currentValue === '-') {
+          return {
+            currentValue: ''
+          }
+        }
+
         if (currentValue !== '' && operator !== '' && previousValue === '') {
           previousValue = currentValue;
         }
@@ -37,6 +43,7 @@ class Calculator extends React.Component {
 
           return {
             currentValue: '',
+            operator: '',
             previousValue: result.toString()
           }
         }
@@ -49,7 +56,12 @@ class Calculator extends React.Component {
       this.setState(prevState => {
         const {previousValue, currentValue, operator} = prevState;
 
-        if (currentValue !== '' && operator === '' && previousValue === '') {
+        if (id === 'subtract' && currentValue === '' && operator !== '') {
+          return {
+            currentValue: '-'
+          }
+        }
+        else if (currentValue !== '' && operator === '' && previousValue === '') {
           return {
             currentValue: '',
             previousValue: currentValue,
