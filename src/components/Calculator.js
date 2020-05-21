@@ -91,11 +91,15 @@ class Calculator extends React.Component {
           }
         } else {
           if (id  === 'decimal') {
-            if (!currentValue.includes(value)) {
+            if (currentValue === '-') {
               return {
-                currentValue: currentValue + value
+                currentValue: '-0' + value
               }
-            }
+            } else if (!currentValue.includes(value)) {
+                return {
+                  currentValue: currentValue + value
+                }
+              }
           } else {
             return {
               currentValue: currentValue + value
