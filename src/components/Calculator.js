@@ -77,7 +77,16 @@ class Calculator extends React.Component {
 
     let enterNumbers = () => {
       this.setState(prevState => {
-        const {currentValue} = prevState;
+        const {currentValue, operator, previousValue} = prevState;
+
+         if (id === 'zero') {
+          if (operator === 'divide' && previousValue !== '') {
+            return {
+              currentValue: ''
+            }
+          }
+          
+        }
 
         if (currentValue === '' || currentValue === '0') {
           if (id  === 'decimal') {
