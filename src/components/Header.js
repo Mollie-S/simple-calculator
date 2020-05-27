@@ -3,7 +3,9 @@ import React from "react";
 function Header() {
   return (
     <div style={headerStyle}>
-      <h1 style={{ textAlign: "center", fontSize: "10vw" }}>Calculator</h1>
+      <h1 style={{ textAlign: "center", fontSize: "calc(100% + 3.5vw)" }}>
+        Calculator
+      </h1>
     </div>
   );
 }
