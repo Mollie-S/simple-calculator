@@ -1,169 +1,175 @@
-import React from 'react';
-import Keypad from './Keypad';
-import Display from './Display'
+import React from "react";
+import Keypad from "./Keypad";
+import Display from "./Display";
 
-const mathOperations =
-{
-  'add': (num1, num2) => num1 + num2,
-  'subtract': (num1, num2) => num1 - num2,
-  'multiply': (num1, num2) => num1 * num2,
-  'divide': (num1, num2) => num1 / num2
-}
+const mathOperations = {
+  add: (num1, num2) => num1 + num2,
+  subtract: (num1, num2) => num1 - num2,
+  multiply: (num1, num2) => num1 * num2,
+  divide: (num1, num2) => num1 / num2,
+};
 
 class Calculator extends React.Component {
   state = {
-    previousValue: '',
-    currentValue: '0',
-    operator: ''
-  }
+    previousValue: "",
+    currentValue: "0",
+    operator: "",
+  };
 
   // handleChange = (e) => this.setState({currentValue: e.target.value});
   handleClick = (e) => {
-
-    const {value, id} = e.target;
+    const { value, id } = e.target;
 
     let performCalculations = () => {
-      this.setState(prevState => {
-        let {previousValue, currentValue, operator} = prevState;
+      this.setState((prevState) => {
+        let { previousValue, currentValue, operator } = prevState;
 
-        if (currentValue === '-') {
+        if (currentValue === "-" || currentValue === "-0.") {
           return {
-            currentValue: ''
-          }
+            currentValue: "",
+          };
         }
 
-        if (currentValue !== '' && operator !== '' && previousValue === '') {
+        if (currentValue !== "" && operator !== "" && previousValue === "") {
           previousValue = currentValue;
         }
 
-        if (currentValue !== '' && operator !== '' && previousValue !== '') {
+        if (currentValue !== "" && operator !== "" && previousValue !== "") {
           let num1 = parseFloat(previousValue);
           let num2 = parseFloat(currentValue);
-          let result = mathOperations[prevState.operator](num1,num2);
+          let result = mathOperations[prevState.operator](num1, num2);
 
           return {
-            currentValue: '',
-            operator: '',
-            previousValue: result.toString()
-          }
+            currentValue: "",
+            operator: "",
+            previousValue: result.toString(),
+          };
         }
       });
-    }
+    };
 
     let enterOperator = () => {
       performCalculations();
 
-      this.setState(prevState => {
-        const {previousValue, currentValue, operator} = prevState;
+      this.setState((prevState) => {
+        const { previousValue, currentValue, operator } = prevState;
 
-        if (id === 'subtract' && currentValue === '' && operator !== '') {
+        if (id === "subtract" && currentValue === "" && operator !== "") {
           return {
-            currentValue: '-'
-          }
-        }
-        else if (currentValue !== '' && operator === '' && previousValue === '') {
+            currentValue: "-",
+          };
+        } else if (
+          currentValue !== "" &&
+          operator === "" &&
+          previousValue === ""
+        ) {
           return {
-            currentValue: '',
+            currentValue: "",
             previousValue: currentValue,
-            operator: id
-          }
+            operator: id,
+          };
         } else {
           return {
-            operator: id
-          }
+            operator: id,
+          };
         }
       });
-    }
+    };
 
     let enterNumbers = () => {
-      this.setState(prevState => {
-        const {currentValue, operator, previousValue} = prevState;
+      this.setState((prevState) => {
+        const { currentValue, operator, previousValue } = prevState;
 
-         if (id === 'zero') {
-          if (operator === 'divide' && previousValue !== '') {
+        if (id === "zero") {
+          if (operator === "divide" && previousValue !== "") {
             return {
-              currentValue: ''
-            }
+              currentValue: "",
+            };
           }
-          
         }
 
-        if (currentValue === '' || currentValue === '0') {
-          if (id  === 'decimal') {
+        if (currentValue === "" || currentValue === "0") {
+          if (id === "decimal") {
             return {
-              currentValue: '0' + value
-            }
+              currentValue: "0" + value,
+            };
           } else {
             return {
-              currentValue: value
-            }
+              currentValue: value,
+            };
           }
         } else {
-          if (id  === 'decimal') {
-            if (currentValue === '-') {
+          if (id === "decimal") {
+            if (currentValue === "-") {
               return {
-                currentValue: '-0' + value
-              }
+                currentValue: "-0" + value,
+              };
             } else if (!currentValue.includes(value)) {
-                return {
-                  currentValue: currentValue + value
-                }
-              }
+              return {
+                currentValue: currentValue + value,
+              };
+            }
           } else {
             return {
-              currentValue: currentValue + value
-            }
+              currentValue: currentValue + value,
+            };
           }
         }
       });
-    }
+    };
 
     let clear = () => {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         return {
-          previousValue: '',
-          currentValue: '0',
-          operator: ''
-        }
+          previousValue: "",
+          currentValue: "0",
+          operator: "",
+        };
       });
-    }
+    };
 
     let convertSign = () => {
-      this.setState(prevState => {
-        const {previousValue, currentValue} = prevState;
+      this.setState((prevState) => {
+        const { previousValue, currentValue } = prevState;
 
-        if (currentValue !== '') {
+        if (currentValue !== "") {
           return {
-            currentValue: (-parseFloat(currentValue)).toString()
-          }
-        } else if (previousValue !== ''){
+            currentValue: (-parseFloat(currentValue)).toString(),
+          };
+        } else if (previousValue !== "") {
           return {
-            previousValue: (-parseFloat(previousValue)).toString()
-          }
+            previousValue: (-parseFloat(previousValue)).toString(),
+          };
         }
       });
-    }
+    };
 
-    if (id === 'plus-minus') {
+    if (id === "plus-minus") {
       convertSign();
-    } else if (id === 'clear') {
+    } else if (id === "clear") {
       clear();
-    } else if (id === 'equals') {
+    } else if (id === "equals") {
       performCalculations();
     } else if (id in mathOperations) {
       enterOperator();
-    } else if (/\d/g.test(value) || id  === 'decimal') {
+    } else if (/\d/g.test(value) || id === "decimal") {
       enterNumbers();
     } else {
-      console.log('Error! Unknown key.')
+      console.log("Error! Unknown key.");
     }
-  }
+  };
 
-  render () {
+  render() {
     // console.log(this.props);
     return (
-      <div className='calculator'>
-        <Display value={this.state.currentValue===''? this.state.previousValue : this.state.currentValue} />
+      <div className="calculator">
+        <Display
+          value={
+            this.state.currentValue === ""
+              ? this.state.previousValue
+              : this.state.currentValue
+          }
+        />
         <Keypad onClick={this.handleClick} />
       </div>
     );
