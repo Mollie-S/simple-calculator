@@ -109,6 +109,10 @@ class Calculator extends React.Component {
                 currentValue: currentValue + value,
               };
             }
+          } else if (id !== "decimal" && currentValue === "-0") {
+            return {
+              currentValue: value,
+            };
           } else {
             return {
               currentValue: currentValue + value,
